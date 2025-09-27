@@ -1,13 +1,13 @@
-
-
 export default function App() {
   return (
     <main className="min-h-screen bg-neutral-50 text-neutral-900">
       <header className="border-b bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <h1 className="text-xl font-bold">Par&apos;s Parlays</h1>
           <nav className="text-sm">
-            <a href="/" className="underline hover:no-underline">Home</a>
+            <a href="/" className="underline hover:no-underline">
+              Home
+            </a>
           </nav>
         </div>
       </header>
@@ -20,16 +20,13 @@ export default function App() {
           </p>
 
           <div className="mt-4 flex gap-3">
-            <button className="rounded-xl bg-brand-500 px-4 py-2 text-white hover:bg-brand-600 active:translate-y-px">
+            <button className="bg-brand-500 hover:bg-brand-600 rounded-xl px-4 py-2 text-white active:translate-y-px">
               Primary Action
             </button>
-            <button className="rounded-xl border px-4 py-2 hover:bg-neutral-50">
-              Secondary
-            </button>
+            <button className="rounded-xl border px-4 py-2 hover:bg-neutral-50">Secondary</button>
           </div>
         </div>
       </section>
     </main>
   );
 }
-
