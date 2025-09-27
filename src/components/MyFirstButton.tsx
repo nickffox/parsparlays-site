@@ -6,7 +6,7 @@ interface MyFirstButtonProps {
   onClick: () => void;
 }
 
-function MyFirstButton({ title, onClick }: MyFirstButtonProps) {  
+function MyFirstButton({ title, onClick }: MyFirstButtonProps) {
   return (
     <button onClick={onClick}>
       {title}
