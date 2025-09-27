@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Declare design tokens (Tailwind v4 style) */
 @theme {
