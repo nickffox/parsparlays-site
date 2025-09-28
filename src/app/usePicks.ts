@@ -1,7 +1,6 @@
-import { use, useEffect, useState } from "react";
-import type { Pick } from "../domain/Pick";
+import { useEffect, useState } from "react";
+import type { Pick } from "../domain/pick";
 import { useRepo } from "./DataProvider";
-import { set } from "zod";
 
 export function usePicks() {
   const repo = useRepo();
@@ -14,19 +13,19 @@ export function usePicks() {
     setLoading(true);
     repo.getAll()
       .then((p) => {
-        if (alive)  setData(p);
+        if (alive) setData(p);
       })
       .catch((e) => {
         if (alive) setError(e);
-      } )
+      })
       .finally(() => {
         if (alive) setLoading(false);
       });
-    return () => { 
-      alive = false; 
+    return () => {
+      alive = false;
     };
   }, [repo]);
-  
+
   return { data, error, loading };
-}      
+}
 
