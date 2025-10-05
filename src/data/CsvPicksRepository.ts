@@ -36,9 +36,10 @@ export class CsvPicksRepository implements PicksRepository {
       const candidate = {
         id: row['ID'] || crypto.randomUUID(),
         result: row['Result'] || 'PENDING',
-        date: row['Date'],
-        name: row['Name'],
-        sport: row['Sport'],
+        picker: row['Picker'] || '',
+        date: row['Date'] || new Date().toISOString(),
+        name: row['Name'] || '',
+        sport: row['Sport'] || '',
         notes: row['Notes'] || undefined,
       };
 

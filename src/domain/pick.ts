@@ -4,6 +4,7 @@ import { z } from 'zod';
 export const PickSchema = z.object({
   id: z.string().min(1),
   result: z.enum(['PENDING', 'WIN', 'LOSS', 'PUSH']).default('PENDING'),
+  picker: z.string().min(1).default('Par'),
   date: z.string().min(1),
   name: z.string().min(1),
   sport: z.string().min(1),

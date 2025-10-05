@@ -62,6 +62,7 @@ export default function Picks() {
                   {/* {p.odds != null ? ` • ${p.odds}` : ''} */}
                 </div>
               </div>
+              <div className="text-xs text-neutral-500">Picked by {p.picker}</div>
               <div className="text-xs text-neutral-500">{p.date} • {p.result}</div>
             </li>
           ))}
