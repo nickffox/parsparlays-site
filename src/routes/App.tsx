@@ -1,6 +1,19 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { useEffect } from 'react';
+import { loadGtag, sendPageView } from '../lib/gtag';
 
 export default function AppLayout() {
+  const location = useLocation();
+  const GA_ID = import.meta.env.VITE_GA_ID as string | undefined;
+
+  useEffect(() => {
+    if (GA_ID) loadGtag(GA_ID);
+  }, [GA_ID]);
+
+  useEffect(() => {
+    if (GA_ID) sendPageView();
+  }, [location, GA_ID]);
+
   return (
     <div className="min-h-screen bg-neutral-50 text-neutral-900">
       <header className="border-b bg-white">
@@ -21,7 +34,7 @@ export default function AppLayout() {
             <NavLink to="/picks" className="underline hover:no-underline">
               Picks
             </NavLink>
-          </nav>  
+          </nav>
         </div>
       </header>
 
