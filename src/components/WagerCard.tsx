@@ -38,7 +38,7 @@ function WagerCard({ pick }: WagerCardProps) {
             case 'PUSH':
                 return <div className="bg-gray-500 text-white px-3 py-1 rounded-md text-sm font-medium">PUSH</div>;
             default:
-                return <div className="bg-yellow-500 text-white px-3 py-1 rounded-md text-sm font-medium">PENDING</div>;
+                return <div className="border border-neutral-400 text-neutral-400 px-3 py-1 rounded-md text-sm font-medium">PENDING</div>;
         }
     };
 
@@ -51,7 +51,7 @@ function WagerCard({ pick }: WagerCardProps) {
             case 'PUSH':
                 return 'bg-gray-500/20 border-gray-500/30';
             default:
-                return 'bg-yellow-500/20 border-yellow-500/30';
+                return 'bg-neutral-400/20 border-neutral-400/30';
         }
     };
 
