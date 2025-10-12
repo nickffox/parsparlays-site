@@ -66,7 +66,7 @@ function WagerCard({ pick }: WagerCardProps) {
     const betSlipId = pick.id; // or extract from pick if available
 
     return (
-        <div className="w-full max-w-sm rounded-lg bg-gray-800 text-white shadow-lg overflow-hidden relative">
+        <div className="w-full max-w-sm rounded-lg bg-white text-neutral-600 shadow-lg overflow-hidden relative">
             {/* Header section with banner background */}
             <div className={`relative ${getBannerColor(pick.result)} py-4 px-4`}>
                 {/* Header with result badge and brand */}
@@ -90,7 +90,7 @@ function WagerCard({ pick }: WagerCardProps) {
                 </div>
                 
                 {/* <div className="text-sm text-gray-300 mb-1">{betType}</div> */}
-                <div className="text-sm text-gray-300 mb-1">{matchup}</div>
+                <div className="text-sm text-neutral-400 mb-1">{matchup}</div>
                 {/* <div className="text-sm text-gray-300 mb-4">{eventDateTime}</div> */}
 
                 {/* Financial section */}
@@ -101,9 +101,29 @@ function WagerCard({ pick }: WagerCardProps) {
                     </div>
                 </div> */}
 
+                {/* Notes section */}
+                {pick.notes && (
+                    <div className={`border-t border-neutral-400 pt-3 ${isShowingNotes ? 'pb-3' : ''}`}>
+                        <button
+                            aria-expanded={isShowingNotes}
+                            onClick={() => setIsShowingNotes((v) => !v)}
+                            className="flex items-center gap-2 text-sm text-neutral-400 hover:text-neutral-600 transition-colors mb-2"
+                        >
+                            <span>{isShowingNotes ? 'Hide notes' : 'Show notes'}</span>
+                            <ChevronIcon isExpanded={isShowingNotes} />
+                        </button>
+
+                        {isShowingNotes && (
+                            <div className="bg-neutral-100 rounded p-3">
+                                <p className="text-sm text-neutral-400">{pick.notes}</p>
+                            </div>
+                        )}
+                    </div>
+                )}
+
                 {/* Bet placement metadata */}
-                <div className="border-t border-gray-600 pt-3 pb-3">
-                    <div className="flex justify-between text-xs text-gray-400">
+                <div className="border-t border-gray-600 pt-3">
+                    <div className="flex justify-between text-xs text-neutral-400">
                         <span>{betPlacement}</span>
                         <div className="flex items-center gap-1">
                             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -115,25 +135,6 @@ function WagerCard({ pick }: WagerCardProps) {
                     </div>
                 </div>
 
-                {/* Notes section */}
-                {pick.notes && (
-                    <div className="border-t border-gray-600 pt-3">
-                        <button
-                            aria-expanded={isShowingNotes}
-                            onClick={() => setIsShowingNotes((v) => !v)}
-                            className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors mb-2"
-                        >
-                            <span>{isShowingNotes ? 'Hide notes' : 'Show notes'}</span>
-                            <ChevronIcon isExpanded={isShowingNotes} />
-                        </button>
-
-                        {isShowingNotes && (
-                            <div className="bg-gray-700 rounded p-3">
-                                <p className="text-sm text-gray-300">{pick.notes}</p>
-                            </div>
-                        )}
-                    </div>
-                )}
             </div>
         </div>
     );
