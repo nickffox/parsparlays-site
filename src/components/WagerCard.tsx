@@ -43,14 +43,14 @@ function WagerCard({ pick }: WagerCardProps) {
     };
 
     // Hard-coded values for missing data
-    const betType = "Spread"; // or extract from pick if available
-    const odds = "-110"; // or extract from pick if available
+    // const betType = "Spread"; // or extract from pick if available
+    // const odds = "-110"; // or extract from pick if available
     const matchup = `${pick.sport} Match`; // or extract from pick if available
-    const eventDateTime = "10/4/25 • 7:35 PM"; // or extract from pick if available
-    const stake = "$10.00"; // or extract from pick if available
-    const payout = pick.result === 'WIN' ? "$19.09" : "$0.00"; // or extract from pick if available
+    // const eventDateTime = "10/4/25 • 7:35 PM"; // or extract from pick if available
+    // const stake = "$10.00"; // or extract from pick if available
+    // const payout = pick.result === 'WIN' ? "$19.09" : "$0.00"; // or extract from pick if available
     const betPlacement = pick.date;
-    const betSlipId = "2099NPNR8J"; // or extract from pick if available
+    // const betSlipId = "2099NPNR8J"; // or extract from pick if available
 
     return (
         <div className="w-full max-w-sm rounded-lg bg-gray-800 text-white shadow-lg overflow-hidden relative">
