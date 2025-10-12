@@ -20,6 +20,24 @@ export default function Picks() {
     return picks.filter(pick => pick.picker === selectedPicker);
   }, [picks, selectedPicker]);
 
+  // Calculate summary statistics
+  const summaryStats = useMemo(() => {
+    if (!filteredPicks || filteredPicks.length === 0) {
+      return { wins: 0, losses: 0, pushes: 0, pending: 0, winPercentage: 0 };
+    }
+
+    const wins = filteredPicks.filter(pick => pick.result === 'WIN').length;
+    const losses = filteredPicks.filter(pick => pick.result === 'LOSS').length;
+    const pushes = filteredPicks.filter(pick => pick.result === 'PUSH').length;
+    const pending = filteredPicks.filter(pick => pick.result === 'PENDING').length;
+    
+    // Calculate win percentage (excluding pending picks)
+    const completedPicks = wins + losses + pushes;
+    const winPercentage = completedPicks > 0 ? Math.round((wins / completedPicks) * 100) : 0;
+
+    return { wins, losses, pushes, pending, winPercentage };
+  }, [filteredPicks]);
+
   // // Map a pick result to a Tailwind background/border class
   // const resultClass = (res?: string) => {
   //   const r = (res ?? '').toLowerCase();
@@ -87,6 +105,27 @@ export default function Picks() {
             </select>
           </div>
         </div>
+
+        {/* Summary Statistics */}
+        {filteredPicks.length > 0 && (
+          <div className="mb-2 rounded-lg bg-neutral-100 p-4">
+            <h3 className="text-md font-medium mb-4">Summary</h3>
+            
+            <div className="text-sm text-neutral-600">
+              Record:&nbsp;
+              <span className="font-semibold">{summaryStats.wins}</span>
+              -
+              <span className="font-semibold">{summaryStats.losses}</span>
+              -
+              <span className="font-semibold">{summaryStats.pushes}</span>
+            </div>
+
+            <div className="text-sm text-neutral-600">
+              Winning Percentage:&nbsp;
+              <span className="font-semibold">{summaryStats.winPercentage}%</span>
+            </div>
+          </div>
+        )}
 
         <ul className="mt-4 space-y-2">
           {filteredPicks.map((p) => (
