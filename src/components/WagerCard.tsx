@@ -63,6 +63,7 @@ function WagerCard({ pick }: WagerCardProps) {
     // const stake = "$10.00"; // or extract from pick if available
     // const payout = pick.result === 'WIN' ? "$19.09" : "$0.00"; // or extract from pick if available
     const betPlacement = pick.date;
+    const pickedBy = pick.picker;
     const betSlipId = pick.id; // or extract from pick if available
 
     return (
@@ -124,7 +125,7 @@ function WagerCard({ pick }: WagerCardProps) {
                 {/* Bet placement metadata */}
                 <div className="border-t border-gray-600 pt-3">
                     <div className="flex justify-between text-xs text-neutral-400">
-                        <span>{betPlacement}</span>
+                        <span>{betPlacement} • {pickedBy}</span>
                         <div className="flex items-center gap-1">
                             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
