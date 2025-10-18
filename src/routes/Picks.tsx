@@ -23,7 +23,7 @@ export default function Picks() {
       : picks.filter(pick => pick.picker === selectedPicker);
     
     // Sort by date (newest first)
-    return filteredPicks.sort((a, b) => a.date.localeCompare(b.date));
+    return filteredPicks.sort((a, b) => a.pickDate.localeCompare(b.pickDate));
   }, [picks, selectedPicker]);
 
   // Calculate summary statistics
