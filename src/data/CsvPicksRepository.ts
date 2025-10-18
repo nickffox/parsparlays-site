@@ -38,7 +38,7 @@ export class CsvPicksRepository implements PicksRepository {
         result: row['Result'] || 'PENDING',
         picker: row['Picker'] || '',
         pickDate: row['PickDate'] || new Date().toISOString(),
-        gameDate: row['UTCGameTime'] || undefined,
+        eventDate: row['UTCGameTime'] || undefined,
         name: row['Name'] || '',
         sport: row['Sport'] || '',
         notes: row['Notes'] || undefined,

@@ -6,7 +6,7 @@ export const PickSchema = z.object({
   result: z.enum(['PENDING', 'WIN', 'LOSS', 'PUSH']).default('PENDING'),
   picker: z.string().min(1).default('Par'),
   pickDate: z.string().min(1), // Date when pick was made
-  gameDate: z.string().min(1).optional(), // Date when game is played (UTC string)
+  eventDate: z.string().min(1).optional(), // Date when game is played (UTC string)
   name: z.string().min(1),
   sport: z.string().min(1),
   notes: z.string().min(1).default(''),

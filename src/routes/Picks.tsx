@@ -34,9 +34,9 @@ export default function Picks() {
         return pickDateComparison;
       }
       
-      // Second round: If pickDates are the same, sort by gameDate
-      const gameDateA = a.gameDate ? new Date(a.gameDate) : new Date(0); // Fallback to epoch if no gameDate
-      const gameDateB = b.gameDate ? new Date(b.gameDate) : new Date(0);
+      // Second round: If pickDates are the same, sort by eventDate
+      const gameDateA = a.eventDate ? new Date(a.eventDate) : new Date(0); // Fallback to epoch if no eventDate
+      const gameDateB = b.eventDate ? new Date(b.eventDate) : new Date(0);
       
       return gameDateB.getTime() - gameDateA.getTime(); // Newest game first
     });

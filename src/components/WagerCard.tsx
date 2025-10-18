@@ -56,10 +56,10 @@ function WagerCard({ pick }: WagerCardProps) {
     };
 
     // Format gameDate to user's local timezone
-    const formatEventDateTime = (gameDate?: string) => {
-        if (!gameDate) return undefined;
+    const formatEventDateTime = (eventDate?: string) => {
+        if (!eventDate) return undefined;
         
-        const date = new Date(gameDate);
+        const date = new Date(eventDate);
         
         // Format as "MM/DD/YY • H:MM AM/PM" in user's local timezone
         const options: Intl.DateTimeFormatOptions = {
@@ -79,7 +79,7 @@ function WagerCard({ pick }: WagerCardProps) {
     // const betType = "Spread"; // or extract from pick if available
     // const odds = "-110"; // or extract from pick if available
     const matchup = pick.sport; // or extract from pick if available
-    const eventDateTime = formatEventDateTime(pick.gameDate);
+    const eventDateTime = formatEventDateTime(pick.eventDate);
     // const stake = "$10.00"; // or extract from pick if available
     // const payout = pick.result === 'WIN' ? "$19.09" : "$0.00"; // or extract from pick if available
     const pickDate = pick.pickDate;
