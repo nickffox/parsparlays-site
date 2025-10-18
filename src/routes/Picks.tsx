@@ -13,30 +13,36 @@ export default function Picks() {
     return pickers.sort(); // Sort alphabetically
   }, [picks]);
 
-  // Filter picks based on selected picker
-  const filteredPicks = useMemo(() => {
+  // Filter picks based on selected picker and sort by date (newest first)
+  const picksToDisplay = useMemo(() => {
     if (!picks) return [];
-    if (selectedPicker === "all") return picks;
-    return picks.filter(pick => pick.picker === selectedPicker);
+    
+    // Filter picks based on selected picker
+    const filteredPicks = selectedPicker === "all" 
+      ? picks 
+      : picks.filter(pick => pick.picker === selectedPicker);
+    
+    // Sort by date (newest first)
+    return filteredPicks.sort((a, b) => a.date.localeCompare(b.date));
   }, [picks, selectedPicker]);
 
   // Calculate summary statistics
   const summaryStats = useMemo(() => {
-    if (!filteredPicks || filteredPicks.length === 0) {
+    if (!picksToDisplay || picksToDisplay.length === 0) {
       return { wins: 0, losses: 0, pushes: 0, pending: 0, winPercentage: 0 };
     }
 
-    const wins = filteredPicks.filter(pick => pick.result === 'WIN').length;
-    const losses = filteredPicks.filter(pick => pick.result === 'LOSS').length;
-    const pushes = filteredPicks.filter(pick => pick.result === 'PUSH').length;
-    const pending = filteredPicks.filter(pick => pick.result === 'PENDING').length;
+    const wins = picksToDisplay.filter(pick => pick.result === 'WIN').length;
+    const losses = picksToDisplay.filter(pick => pick.result === 'LOSS').length;
+    const pushes = picksToDisplay.filter(pick => pick.result === 'PUSH').length;
+    const pending = picksToDisplay.filter(pick => pick.result === 'PENDING').length;
     
     // Calculate win percentage (excluding pending picks)
     const completedPicks = wins + losses + pushes;
     const winPercentage = completedPicks > 0 ? Math.round((wins / completedPicks) * 100) : 0;
 
     return { wins, losses, pushes, pending, winPercentage };
-  }, [filteredPicks]);
+  }, [picksToDisplay]);
 
   // // Map a pick result to a Tailwind background/border class
   // const resultClass = (res?: string) => {
@@ -83,7 +89,7 @@ export default function Picks() {
     <main className="mx-auto max-w-6xl p-6">
       <div className="rounded-2xl border bg-white p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold">Picks ({filteredPicks.length})</h2>
+          <h2 className="text-lg font-semibold">Picks ({picksToDisplay.length})</h2>
           
           {/* Filter dropdown */}
           <div className="flex items-center gap-2">
@@ -107,7 +113,7 @@ export default function Picks() {
         </div>
 
         {/* Summary Statistics */}
-        {filteredPicks.length > 0 && (
+        {picksToDisplay.length > 0 && (
           <div className="mb-2 rounded-lg bg-neutral-100 p-4">
             <h3 className="text-md font-medium mb-4">Summary</h3>
             
@@ -128,7 +134,7 @@ export default function Picks() {
         )}
 
         <ul className="mt-4 space-y-2">
-          {filteredPicks.map((p) => (
+          {picksToDisplay.map((p) => (
             <WagerCard key={p.id} pick={p} />
           ))}
         </ul>
