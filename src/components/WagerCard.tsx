@@ -55,11 +55,31 @@ function WagerCard({ pick }: WagerCardProps) {
         }
     };
 
+    // Format gameDate to user's local timezone
+    const formatEventDateTime = (gameDate?: string) => {
+        if (!gameDate) return undefined;
+        
+        const date = new Date(gameDate);
+        
+        // Format as "MM/DD/YY • H:MM AM/PM" in user's local timezone
+        const options: Intl.DateTimeFormatOptions = {
+            month: 'numeric',
+            day: 'numeric', 
+            year: '2-digit',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        };
+        
+        const formatted = date.toLocaleString('en-US', options);
+        return formatted.replace(',', ' •'); // Replace comma with bullet
+    };
+
     // Hard-coded values for missing data
     // const betType = "Spread"; // or extract from pick if available
     // const odds = "-110"; // or extract from pick if available
     const matchup = pick.sport; // or extract from pick if available
-    // const eventDateTime = "10/4/25 • 7:35 PM"; // or extract from pick if available
+    const eventDateTime = formatEventDateTime(pick.gameDate);
     // const stake = "$10.00"; // or extract from pick if available
     // const payout = pick.result === 'WIN' ? "$19.09" : "$0.00"; // or extract from pick if available
     const pickDate = pick.pickDate;
@@ -92,7 +112,9 @@ function WagerCard({ pick }: WagerCardProps) {
                 
                 {/* <div className="text-sm text-gray-300 mb-1">{betType}</div> */}
                 <div className="text-sm text-neutral-400 mb-1">{matchup}</div>
-                {/* <div className="text-sm text-gray-300 mb-4">{eventDateTime}</div> */}
+                {eventDateTime && (
+                    <div className="text-xs text-neutral-400 mb-4">{eventDateTime}</div>    
+                )}
 
                 {/* Financial section */}
                 {/* <div className="border-t border-gray-600 pt-3 pb-3">

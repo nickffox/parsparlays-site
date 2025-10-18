@@ -22,8 +22,24 @@ export default function Picks() {
       ? picks 
       : picks.filter(pick => pick.picker === selectedPicker);
     
-    // Sort by date (newest first)
-    return filteredPicks.sort((a, b) => a.pickDate.localeCompare(b.pickDate));
+    // Two-round sorting: first by pickDate (newest first), then by gameDate
+    return filteredPicks.sort((a, b) => {
+      // First round: Sort by pickDate (newest first)
+      const pickDateA = new Date(a.pickDate);
+      const pickDateB = new Date(b.pickDate);
+      const pickDateComparison = pickDateB.getTime() - pickDateA.getTime();
+      
+      // If pickDates are different, use that result
+      if (pickDateComparison !== 0) {
+        return pickDateComparison;
+      }
+      
+      // Second round: If pickDates are the same, sort by gameDate
+      const gameDateA = a.gameDate ? new Date(a.gameDate) : new Date(0); // Fallback to epoch if no gameDate
+      const gameDateB = b.gameDate ? new Date(b.gameDate) : new Date(0);
+      
+      return gameDateB.getTime() - gameDateA.getTime(); // Newest game first
+    });
   }, [picks, selectedPicker]);
 
   // Calculate summary statistics
